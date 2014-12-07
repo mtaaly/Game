@@ -1,4 +1,4 @@
-package com.github.user;
+package com.challengeme.entities;
 
 /**
  * 
@@ -7,20 +7,12 @@ package com.github.user;
  * @author Steeve
  * 
  */
-public class Registration {
+public class User {
 
 	private  int id;
 	private String name;
 	private String password;
 	private String email;
-	
-	
-	public Registration(String name, String password, String email){
-		id++;
-		this.setName(name);
-		this.setPassword(password);
-		this.setEmail(email);
-	}
 	
 	/*
 	 * gibt den Id zurück

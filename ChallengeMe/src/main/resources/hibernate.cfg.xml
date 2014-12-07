@@ -7,13 +7,16 @@
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost/db1.user</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/challengeme</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
         <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+        <property name="format_sql">true</property>
+        <property name="show_sql">true</property>
+        
         
         <!-- Automatic schema creation (begin) === -->
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
  
  
         <!-- Simple memory-only cache -->
@@ -26,8 +29,7 @@
         <!-- # mapping files with external dependencies # -->
         <!-- ############################################ -->
  
-        <mapping resource="com/github/user/Registration.hbm.xml" />
- 
+        <mapping resource="com/challengeme/config/user.hbm.xml" />
         
         
     </session-factory>
