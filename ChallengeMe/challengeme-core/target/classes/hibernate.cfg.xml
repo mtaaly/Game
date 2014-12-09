@@ -29,7 +29,7 @@
         <!-- # mapping files with external dependencies # -->
         <!-- ############################################ -->
  
-        <mapping resource="com/challengeme/config/user.hbm.xml" />
+        <mapping resource="com/challengeme/entities/user.hbm.xml" />
         
         
     </session-factory>
