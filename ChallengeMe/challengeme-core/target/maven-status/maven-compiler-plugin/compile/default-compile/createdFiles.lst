@@ -1,5 +1,5 @@
+com\challengeme\dao\UserDao.class
+com\challengeme\register\Registrieren.class
 com\challengeme\config\HibernateConfigurator.class
 com\challengeme\config\TransaktionContainer.class
-com\challengeme\dao\UserDao.class
 com\challengeme\entities\User.class
-com\challengeme\register\Registrieren.class
