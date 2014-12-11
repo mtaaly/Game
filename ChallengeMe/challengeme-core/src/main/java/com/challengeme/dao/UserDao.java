@@ -32,11 +32,15 @@ public class UserDao {
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUsers(){
 		Session session = HibernateConfigurator.getInstance().getSession();
+		session.flush();
+		Transaction tx = TransaktionContainer.getTransaktion();
 		try {
 			List<User> users=session.createQuery(" select u from User u ").list();
+			tx.commit();
 			return users;
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			tx.rollback();
 		} 
 		return null;
 	}

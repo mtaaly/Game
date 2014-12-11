@@ -14,7 +14,7 @@ public class UserController {
 	@Autowired
 	private ServiceLocator services;
 
-	@RequestMapping(value = "/showMessage")
+	@RequestMapping(value = "/showUser")
 	public String showMessage(Model model) {
 		List<User> users = services.getUserService().getAllUsers();
 		StringBuilder usersName = new StringBuilder();
@@ -24,7 +24,7 @@ public class UserController {
 			}
 		}
 		model.addAttribute("message", usersName.toString());
-		return "showMessage";
+		return "showUser";
 	}
 
 }

@@ -8,7 +8,7 @@ public class Registrieren {
 	
 	public static void main(String[] args) {
 		Registrieren dienst=new Registrieren();
-		dienst.dao.insert("taalymar@yahoo.fr", "Taaly", "taaly");
+		dienst.dao.insert("maever10@yahoo.fr", "Mabelle", "mabelle");
 		System.exit(0);
 	}
 

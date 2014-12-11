@@ -74,10 +74,5 @@
 			<artifactId>jandex</artifactId>
 			<version>1.1.0.Final</version>
 		</dependency>
-
-
-
-
-
 	</dependencies>
 </project>
