@@ -1,0 +1,64 @@
+package com.tank.challengeme.dto;
+
+public class UserDTO {
+	private  int id;
+	private String name;
+	private String password;
+	private String email;
+	
+	/*
+	 * gibt den Id zurück
+	 */
+	public int getId() {
+		return id;
+	}
+	/*
+	 * setzt ein Nummer für die Id.
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	/*
+	 * gibt den Name zurück
+	 */
+	public String getName() {
+		return name;
+	}
+	
+	/*
+	 * setzt einen Name.
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/*
+	 * gibt den Password zurück
+	 */
+	public String getPassword() {
+		return password;
+	}
+	
+	/*
+	 * setzt einen Password.
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	/*
+	 * gibt den Email zurück
+	 */
+	public String getEmail() {
+		return email;
+	}
+	
+	/*
+	 * setzt eine Email adresse.
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+}

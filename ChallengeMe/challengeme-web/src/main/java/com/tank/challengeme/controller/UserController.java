@@ -1,4 +1,4 @@
-package com.tank.challengeme;
+package com.tank.challengeme.controller;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.challengeme.entities.User;
+import com.tank.challengeme.service.ServiceLocator;
 
 @Controller
 public class UserController {
@@ -16,6 +17,7 @@ public class UserController {
 
 	@RequestMapping(value = "/showUser")
 	public String showMessage(Model model) {
+		
 		List<User> users = services.getUserService().getAllUsers();
 		StringBuilder usersName = new StringBuilder();
 		if (users != null && !users.isEmpty()) {
@@ -25,6 +27,10 @@ public class UserController {
 		}
 		model.addAttribute("message", usersName.toString());
 		return "showUser";
+	}
+	
+	public void insert(User user){
+		services.getUserService().insert(user);
 	}
 
 }

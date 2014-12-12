@@ -44,5 +44,20 @@ public class UserDao {
 		} 
 		return null;
 	}
+	public void insert(User employee) {
+		Session session = HibernateConfigurator.getInstance().getSession();
+		Transaction tx = TransaktionContainer.getTransaktion();
+		try {
+			session.save(employee);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null){
+				tx.rollback();
+				session.evict(employee);
+			}
+			e.printStackTrace();
+		} 
+		
+	}
 
 }
