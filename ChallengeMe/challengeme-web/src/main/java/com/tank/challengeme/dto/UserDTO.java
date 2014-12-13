@@ -1,5 +1,7 @@
 package com.tank.challengeme.dto;
 
+import com.challengeme.entities.User;
+
 public class UserDTO {
 	private  int id;
 	private String name;
@@ -7,20 +9,20 @@ public class UserDTO {
 	private String email;
 	
 	/*
-	 * gibt den Id zurück
+	 * gibt den Id zurï¿½ck
 	 */
 	public int getId() {
 		return id;
 	}
 	/*
-	 * setzt ein Nummer für die Id.
+	 * setzt ein Nummer fï¿½r die Id.
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 	
 	/*
-	 * gibt den Name zurück
+	 * gibt den Name zurï¿½ck
 	 */
 	public String getName() {
 		return name;
@@ -34,7 +36,7 @@ public class UserDTO {
 	}
 	
 	/*
-	 * gibt den Password zurück
+	 * gibt den Password zurï¿½ck
 	 */
 	public String getPassword() {
 		return password;
@@ -48,7 +50,7 @@ public class UserDTO {
 	}
 	
 	/*
-	 * gibt den Email zurück
+	 * gibt den Email zurï¿½ck
 	 */
 	public String getEmail() {
 		return email;
@@ -59,6 +61,14 @@ public class UserDTO {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public static UserDTO toUserDTO(User user){
+		UserDTO dto=new UserDTO();
+		dto.setEmail(user.getEmail());
+		dto.setId(user.getId());
+		dto.setName(user.getName());
+		dto.setPassword(user.getPassword());
+		return dto;
 	}
 
 }
