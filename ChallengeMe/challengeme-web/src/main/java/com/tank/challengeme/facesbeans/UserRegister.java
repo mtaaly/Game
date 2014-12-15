@@ -54,7 +54,7 @@ public class UserRegister {
 		// null,
 		// new FacesMessage("The Employee " + this.user.getName()
 		//				+ " Is Registered Successfully"));
-		return "/showUser.xhtml?faces-redirect=true";
+		return "/login.xhtml?faces-redirect=true";
 	}
 
 	public UserService getUserService() {

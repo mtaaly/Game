@@ -11,7 +11,7 @@
 	<p:messages id="messages" showDetail="true" autoUpdate="true" />
     <p:panelGrid columns="2">
         <p:outputLabel for="name" value="Enter Employee Name:"></p:outputLabel>
-        <p:inputText id="name" value="#{userRegister.user.name}" required="true"></p:inputText>
+        <p:inputText id="name" value="#{userRegister.user.name}" required="true" validatorMessage="Name is required"></p:inputText>
         <p:outputLabel for="email" value="Enter Employee Email:"></p:outputLabel>
         <p:inputText id="email" value="#{userRegister.user.email}" required="true" >
         <f:validator validatorId="custom.emailValidator" />

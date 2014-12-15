@@ -55,5 +55,28 @@ public class UserDao {
 		} 
 		
 	}
+	@SuppressWarnings("unchecked")
+	public User findUser(String login, String password) {
+		Session session = HibernateConfigurator.getInstance().getSession();
+		Transaction tx = TransaktionContainer.getTransaktion();
+		try {
+			List<User> users = session
+					.createQuery(
+							"select u from User u where u.email=:login and u.password=:pwd")
+					.setParameter("login", login).setParameter("pwd", password)
+					.list();
+			tx.commit();
+			if(users.isEmpty()){
+				return null;
+			}
+			return users.get(0);
+		} catch (HibernateException e) {
+			if (tx != null){
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} 
+		return null;
+	}
 
 }

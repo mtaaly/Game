@@ -20,5 +20,9 @@ public class UserService {
 		return services.getUserService().getAllUsers();
 		
 	}
+	public User login(String login, String password) {
+		// TODO Auto-generated method stub
+		return services.getUserService().findUser(login,password);
+	}
 
 }
