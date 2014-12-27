@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.challengeme.entities.Answer" table="answer">
+		<id name="id" type="int" column="ID">
+			<generator class="native" />
+		</id>
+
+		<property name="answer" type="string">
+			<column name="answer" length="30" not-null="true" />
+		</property>
+
+		<many-to-one name="multipleChoice"
+			class="com.challengeme.entities.MultipleChoice" column="multiplechoice_id"
+			not-null="false" />
+		
+
+	</class>
+</hibernate-mapping>

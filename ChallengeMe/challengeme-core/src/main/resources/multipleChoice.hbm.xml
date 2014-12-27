@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.challengeme.entities.MultipleChoice" table="MULTIPLECHOICE">
+		<id name = "id" type="int" column ="id">
+          <generator class ="increment" />
+        </id>
+
+		<property name="question" type="string">
+			<column name="QUESTION" length="150" />
+		</property>
+		
+		<many-to-one name="kategorie"
+			class="com.challengeme.entities.Kategorie" column="kategorieId"
+			not-null="false" /> 
+
+		<set name="answers" table="Answer" fetch="select" inverse="true" cascade="all">
+			<key column="multiplechoice_id" not-null="false" />
+			<one-to-many class="com.challengeme.entities.Answer" />
+		</set>
+		
+		<many-to-one name="correctAnswer" class="com.challengeme.entities.Answer"
+            column="answer_id" unique="true" not-null="true"
+            cascade="all" />
+	   
+	   
+	</class>
+</hibernate-mapping>

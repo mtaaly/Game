@@ -16,7 +16,7 @@
         
         
         <!-- Automatic schema creation (begin) === -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
  
  
         <!-- Simple memory-only cache -->
@@ -30,8 +30,11 @@
         <!-- ############################################ -->
  
         <mapping resource="user.hbm.xml" />
-        
-        
+        <mapping resource="questionForQuiz.hbm.xml" />
+        <mapping resource="multipleChoice.hbm.xml" /> 
+        <mapping resource="answer.hbm.xml" />
+        <mapping resource="kategorie.hbm.xml" /> 
+        <mapping resource="level.hbm.xml" />  
     </session-factory>
     
     
