@@ -13,7 +13,11 @@
 			<column name="QUESTION" length="150" />
 		</property>
 		
-		<many-to-one name="kategorie"
+		<many-to-one name="level"
+			class="com.challengeme.entities.Level" column="levelId"
+			not-null="false" />  
+			
+		<many-to-one name="unterKategorie"
 			class="com.challengeme.entities.Kategorie" column="kategorieId"
 			not-null="false" /> 
 
@@ -23,7 +27,7 @@
 		</set>
 		
 		<many-to-one name="correctAnswer" class="com.challengeme.entities.Answer"
-            column="answer_id" unique="true" not-null="true"
+            column="answer_id" unique="true" not-null="false"
             cascade="all" />
 	   
 	   

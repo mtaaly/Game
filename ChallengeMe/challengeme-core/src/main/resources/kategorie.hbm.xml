@@ -12,18 +12,20 @@
 		<property name="kategorieName" type="string">
 			<column name="KATEGORIENAME" length="30" />
 		</property>
-
+		
+		
 	   <set name="multipleChoices" table="multiplechoice" fetch="select" inverse="true" cascade="all">
 			<key column="kategorieId" not-null="false" />
 			<one-to-many class="com.challengeme.entities.MultipleChoice" />
 		</set>
 		
-	   <many-to-one name="level"
-			class="com.challengeme.entities.Level" column="levelId"
-			not-null="false" />  
-		
+	   <set name="unterKategories" table="kategorie" fetch="select"  cascade="all">
+			<key column="kId" not-null="false" />
+			<one-to-many class="com.challengeme.entities.Kategorie" />
+	   </set>	
 	   
-	
-	
+	   <many-to-one name="oberKategorie"
+			class="com.challengeme.entities.Kategorie" column="kId"
+			not-null="false" />
 	</class>
 </hibernate-mapping>

@@ -34,7 +34,8 @@
         <mapping resource="multipleChoice.hbm.xml" /> 
         <mapping resource="answer.hbm.xml" />
         <mapping resource="kategorie.hbm.xml" /> 
-        <mapping resource="level.hbm.xml" />  
+        <mapping resource="level.hbm.xml" />
+         <mapping resource="spiel.hbm.xml" />   
     </session-factory>
     
     
