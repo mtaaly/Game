@@ -16,7 +16,7 @@ import com.challengeme.entities.Answer;
 public class AnswerDao {
  
 	
-	/* Method to insert a answer to the records */
+	/** Method to insert a answer to the records */
 	public Answer insert(String answer) {
 		Transaction tx = TransaktionContainer.getTransaktion();
 		Session session = HibernateConfigurator.getInstance().getSession();
@@ -25,7 +25,7 @@ public class AnswerDao {
 			Answer reg = new Answer();
 			reg.setAnswer(answer);
 			session.save(reg);
-			session.flush();
+//			session.flush();
 			tx.commit();
 			return reg;
 		} catch (HibernateException e) {
@@ -36,14 +36,19 @@ public class AnswerDao {
        return null;
 	}
 	
-	// Method to DELETE a answer from the records 
+	/** Method to DELETE a answer from the records */
 	public void delete(Integer answerID) {
 		Transaction tx = TransaktionContainer.getTransaktion();
 		Session session = HibernateConfigurator.getInstance().getSession();
 		try {
 		
 			Answer del = (Answer) session.get(Answer.class, answerID);
-			session.delete(del);
+			if(del.getMultipleChoice()==null){
+				session.delete(del);
+			}else{
+				del.setMultipleChoice(null);
+				session.delete(del);
+			}
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
@@ -52,7 +57,7 @@ public class AnswerDao {
 		} 
 	}
 	
-	// Method to update a answer from the records 
+	/** Method to update a answer from the records */ 
 	public void update(Integer answerID, String answer) {
 		
 		Transaction tx = TransaktionContainer.getTransaktion();
