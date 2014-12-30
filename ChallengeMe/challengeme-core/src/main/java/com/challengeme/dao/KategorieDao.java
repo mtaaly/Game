@@ -1,6 +1,7 @@
 package com.challengeme.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -12,59 +13,94 @@ import com.challengeme.entities.Kategorie;
 import com.challengeme.entities.MultipleChoice;
 
 public class KategorieDao {
+
+/**
+ * Ordnet eine unterkategorie zu einer kategorie
+ * @param kName
+ * @param unterKategories
+ * @return oberkategorie
+ */
+public Kategorie createKategorie(String kName, Set<Kategorie> unterKategories) {
 	
-	/* Method to insert a question to the records */
-	public Kategorie insert(String kategorieName,MultipleChoice... multipleChoices) {
+	Transaction tx = TransaktionContainer.getTransaktion();
+	Session session = HibernateConfigurator.getInstance().getSession();
+	try {
 		
-		//TODO response muss be in answer array
-		Transaction tx = TransaktionContainer.getTransaktion();
-		Session session = HibernateConfigurator.getInstance().getSession();
-		try {
-			Kategorie reg = new Kategorie();
-			reg.setKategorieName(kategorieName);
-			for(MultipleChoice m : multipleChoices){
-				m.setKategorie(reg);
-			   	reg.getMultipleChoices().add(m);
+		
+		
+		Kategorie oberKategorie = new Kategorie();
+		oberKategorie.setKategorieName(kName);
+		for(Kategorie k: unterKategories){
+			if(k.getOberKategorie()!=null){
+				continue;
 			}
-			session.save(reg);
-			tx.commit();
-			return reg;
-		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} 
-        return null;
-	}
+			k.setOberKategorie(oberKategorie);
+			oberKategorie.getUnterKategories().add(k);
+			session.saveOrUpdate(k);
+		}
+		
+		session.save(oberKategorie);
+		tx.commit();
+		return oberKategorie;
+	} catch (HibernateException e) {
+		if (tx != null)
+			tx.rollback();
+		e.printStackTrace();
+	} 
+	return null;
+}
+
+   /**
+    * fügt ein MultipleChoice zu einer UnterKategorie ein.
+    * @param unterKategorie
+    * @param multiplechoices
+    * @return
+    */
+public Kategorie insert(Kategorie unterKategorie, MultipleChoice... multiplechoices)  {
 	
-public void insert(String kategorieName) {
-		
-		//TODO response muss be in answer array
-		Transaction tx = TransaktionContainer.getTransaktion();
-		Session session = HibernateConfigurator.getInstance().getSession();
-		try {
-			Kategorie reg = new Kategorie();
-			reg.setKategorieName(kategorieName);
-			session.save(reg);
-			tx.commit();
-		
-		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} 
-        
-	}
 
 	
-	// Method to DELETE a question from the records 
+	Transaction tx = TransaktionContainer.getTransaktion();
+	Session session = HibernateConfigurator.getInstance().getSession();
+	try {
+		for(MultipleChoice m : multiplechoices){
+		  //setzt unterkategorie zu m.
+			m.setUnterKategorie(unterKategorie);
+		  // fügt m zu unterkategorie ein 	
+			unterKategorie.getMultipleChoices().add(m);
+		}
+		session.save(unterKategorie);
+		tx.commit();
+		return unterKategorie;
+	} catch (HibernateException e) {
+		if (tx != null)
+			tx.rollback();
+		e.printStackTrace();
+	}
+	return null; 
+}
+	
+	// Method to DELETE a kategorie from the records 
 	public void delete(Integer kategorieID) {
 		Transaction tx = TransaktionContainer.getTransaktion();
 		Session session = HibernateConfigurator.getInstance().getSession();
 		try {
 		
 			Kategorie del = (Kategorie) session.get(Kategorie.class, kategorieID);
-			session.delete(del);
+			//wenn die kategorie keine Fragen enthält
+			//dann lösche einfach die kategorie
+			if(del.getMultipleChoices()==null){
+				session.delete(del);
+			}else{
+			// sonst setze die kategorie von jede
+			// frage auf null
+				for(MultipleChoice m : del.getMultipleChoices()){
+					m.setUnterKategorie(null);
+				}
+				del.setMultipleChoices(null);
+				session.delete(del);
+			}
+			
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
@@ -73,7 +109,7 @@ public void insert(String kategorieName) {
 		} 
 	}
 	
-	 //Method to update a question from the records 
+	 //Method to update a kategorie from the records 
 	public void updateKategorie(Integer kategorieID, String kategorieName) {
 		
 		Transaction tx = TransaktionContainer.getTransaktion();
