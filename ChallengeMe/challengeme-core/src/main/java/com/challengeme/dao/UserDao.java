@@ -10,6 +10,7 @@ import com.challengeme.config.HibernateConfigurator;
 import com.challengeme.config.TransaktionContainer;
 import com.challengeme.entities.User;
 
+
 public class UserDao {
 
 	public void insert(String email, String name, String password) {
@@ -28,6 +29,62 @@ public class UserDao {
 			e.printStackTrace();
 		} 
 
+	}
+	
+	public User insert(String name) {
+		Transaction tx = TransaktionContainer.getTransaktion();
+		Session session = HibernateConfigurator.getInstance().getSession();
+		try {
+			User reg = new User();
+			reg.setName(name);
+			session.save(reg);
+			tx.commit();
+			return reg;
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} 
+         return null;
+	}
+	
+	/* Method to DELETE an user from the records */
+	public void delete(Integer UserID) {
+		Transaction tx = TransaktionContainer.getTransaktion();
+		Session session = HibernateConfigurator.getInstance().getSession();
+		try {
+		
+		    User del = (User) session.get(User.class, UserID);
+			if(del.getSpiel()==null){
+				session.delete(del);
+			}else{
+				del.setSpiel(null);
+			}
+		    session.delete(del);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} 
+	}
+	
+	public void update(Integer userID, String email, String name , String password) {
+		Session session = HibernateConfigurator.getInstance().getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			User upd = (User) session.get(User.class, userID);
+			upd.setEmail(email);
+			upd.setName(name);
+			upd.setPassword(password);
+			session.update(upd);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} 
 	}
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUsers(){

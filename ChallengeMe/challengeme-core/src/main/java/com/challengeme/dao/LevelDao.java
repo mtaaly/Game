@@ -1,9 +1,6 @@
 package com.challengeme.dao;
 
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -11,8 +8,6 @@ import org.hibernate.Transaction;
 
 import com.challengeme.config.HibernateConfigurator;
 import com.challengeme.config.TransaktionContainer;
-import com.challengeme.entities.Answer;
-import com.challengeme.entities.Kategorie;
 import com.challengeme.entities.Level;
 import com.challengeme.entities.MultipleChoice;
 
