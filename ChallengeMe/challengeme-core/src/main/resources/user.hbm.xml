@@ -20,5 +20,11 @@
         <property name="email" type="string" >
             <column name="EMAIL" length="30" not-null="true" />
         </property>
+        
+        <many-to-one name="spiel"
+			class="com.challengeme.entities.Spiel" column="spielId"
+			not-null="false" />
+        
+        
     </class>
 </hibernate-mapping>

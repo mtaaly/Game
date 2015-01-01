@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.challengeme.entities.Level" table="Level">
+		<id name="levelId" type="int" column="ID">
+			<generator class="native" />
+		</id>
+
+		<property name="levelName" type="string">
+			<column name="LEVELNAME" length="20" />
+		</property>
+
+		<set name="multipleChoices" table="multiplechoice" fetch="select"
+			inverse="true" cascade="all">
+			<key column="levelId" not-null="false" />
+			<one-to-many class="com.challengeme.entities.MultipleChoice" />
+		</set>
+		
+		<many-to-one name="spiel"
+			class="com.challengeme.entities.Spiel" column="spielId"
+			not-null="false" />  
+
+	</class>
+</hibernate-mapping>

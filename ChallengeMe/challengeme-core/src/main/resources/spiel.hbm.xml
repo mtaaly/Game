@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.challengeme.entities.Spiel" table="SPIEL">
+		<id name = "id" type="int" column ="id">
+          <generator class ="increment" />
+        </id>
+	 
+		<set name="levels" table="Level" fetch="select" inverse="true" cascade="all">
+			<key column="spielId" not-null="false" />
+			<one-to-many class="com.challengeme.entities.Level" />
+		</set> 
+		<set name="users" table="User" fetch="select" inverse="true" cascade="all">
+			<key column="spielId" not-null="false" />
+			<one-to-many class="com.challengeme.entities.User" />
+		</set>  
+	</class>
+</hibernate-mapping>
